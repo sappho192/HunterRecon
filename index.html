@@ -57,10 +57,9 @@
                             var percentCell = document.getElementById(String(alphabet[i]+3));
                             var percentData = data[i][6];
                             if(percentData.length > 3) {
-//                                percentCell.style.fontWeight = 'bold';
                                 percentCell.style.backgroundColor = "rgba(140,38,5,0.95)";
                             } else {
-                                percentCell.style.backgroundColor = "rgba(5,38,87,1)";
+                                percentCell.style.backgroundColor = "rgba(5,38,87,1.0)";
                             }
                             percentCell.innerHTML = percentData;
                         }
@@ -76,8 +75,8 @@
             setInterval(initClient, 30000);
         </script>
 <!--    <div><input type="button" onclick="initClient();" value="수동갱신" /></div>-->
-    <div style="width: 180px">
-        <table id="huntTable">
+    <div id="huntDivA" style="width: 180px">
+        <table id="huntTableA">
         <colgroup>
         <col style="width: 30%;">
         <col style="width: 65%;">

@@ -4,11 +4,11 @@ body {
     color: #AACCFF;
     background-color: rgba(5, 38, 87, 0.95);
 }
-#huntTable {
+#huntTableA {
     font-size: 0.7em;
     width: 100%;
 }
 
-#huntTable th#head{border-bottom: 1px solid #ccc;}
+#huntTableA th#head{border-bottom: 1px solid #ccc;}
 
-#huntTable tr:nth-child(even){background-color: rgba(5, 38, 87, 1);}
+#huntTableA tr:nth-child(even){background-color: rgba(5, 38, 87, 1);}
