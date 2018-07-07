@@ -14,12 +14,6 @@
                 var API_KEY = 'AIzaSyAxFo4vumR9TLX-0-5zUaUbzXdY7mzDhOk';
                 var CLIENT_ID = '17741540562-l3u3pptf45khhkpv103e7737imama9b1.apps.googleusercontent.com';
 
-                // TODO: Authorize using one of the following scopes:
-                //   'https://www.googleapis.com/auth/drive'
-                //   'https://www.googleapis.com/auth/drive.file'
-                //   'https://www.googleapis.com/auth/drive.readonly'
-                //   'https://www.googleapis.com/auth/spreadsheets'
-                //   'https://www.googleapis.com/auth/spreadsheets.readonly'
                 var SCOPE = 'https://www.googleapis.com/auth/spreadsheets.readonly';
 
                 gapi.client.init({
@@ -58,7 +52,13 @@
                         {
                             document.getElementById(String(alphabet[i]+1)).innerHTML = data[i][0];
                             document.getElementById(String(alphabet[i]+2)).innerHTML = data[i][1];
-                            document.getElementById(String(alphabet[i]+3)).innerHTML = data[i][6];
+                            var percentCell = document.getElementById(String(alphabet[i]+3));
+                            var percentData = data[i][6];
+                            if(percentData.length > 3) {
+//                                percentCell.style.fontWeight = 'bold';
+                                percentCell.style.backgroundColor = "rgba(140,38,5,0.95)";
+                            }
+                            percentCell.innerHTML = percentData;
                         }
                     else if(data[i].length == 4)
                         {// 실종마물
