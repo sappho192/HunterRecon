@@ -3,13 +3,8 @@
         <meta charset="utf-8">
         <title>[FFXIV] FF14 Hunter</title>
         <script src="https://apis.google.com/js/api.js"></script>
-        <style type="text/css">
-            .tg  {border-collapse:collapse;border-spacing:0;border-color:#999;}
-            .tg td{font-family:Arial, sans-serif;/*font-size:14px;*/padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#999;color:#444;background-color:#F7FDFA;}
-            .tg th{font-family:Arial, sans-serif;/*font-size:14px;*/font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#999;color:#fff;background-color:#26ADE4;}
-            .tg .tg-4a1m{/*font-size:10px;*/border-color:inherit;vertical-align:top}
-            .tg .tg-s2sm{background-color:#D2E4FC;/*font-size:10px;*/border-color:inherit;vertical-align:top}
-        </style>
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-nanum-barun-gothic@1.0.0/nanumbarungothic.min.css">
     </head>
     <body>
         <script>
@@ -76,86 +71,86 @@
             
             setInterval(initClient, 30000);
         </script>
-    <div><input type="button" onclick="initClient();" value="수동갱신" /></div>
-    <div>
-        <table class="tg" style="width: 100%">
+<!--    <div><input type="button" onclick="initClient();" value="수동갱신" /></div>-->
+    <div style="width: 280px">
+        <table id="huntTable">
         <colgroup>
-        <col style="width: 15%;">
-        <col style="width: 80%;">
+        <col style="width: 35%;">
+        <col style="width: 60%;">
         <col style="width: 5%;">
         </colgroup>
           <tr>
-            <th class="tg-4a1m" colspan="3">A급 마물 시간표</th>
+            <th id="head" colspan="3">A급 마물 시간표</th>
           </tr>
           <tr>
-            <td class="tg-s2sm" id='A1'></td>
-            <td class="tg-s2sm" id='A2'></td>
-            <td class="tg-s2sm" id='A3'></td>
+            <td id='A1'></td>
+            <td id='A2'></td>
+            <td id='A3'></td>
           </tr>
           <tr>
-            <td class="tg-4a1m" id='B1'></td>
-            <td class="tg-4a1m" id='B2'></td>
-            <td class="tg-4a1m" id='B3'></td>
+            <td id='B1'></td>
+            <td id='B2'></td>
+            <td id='B3'></td>
           </tr>
           <tr>
-            <td class="tg-s2sm" id='C1'></td>
-            <td class="tg-s2sm" id='C2'></td>
-            <td class="tg-s2sm" id='C3'></td>
+            <td id='C1'></td>
+            <td id='C2'></td>
+            <td id='C3'></td>
           </tr>
           <tr>
-            <td class="tg-4a1m" id='D1'></td>
-            <td class="tg-4a1m" id='D2'></td>
-            <td class="tg-4a1m" id='D3'></td>
+            <td id='D1'></td>
+            <td id='D2'></td>
+            <td id='D3'></td>
           </tr>
           <tr>
-            <td class="tg-s2sm" id='E1'></td>
-            <td class="tg-s2sm" id='E2'></td>
-            <td class="tg-s2sm" id='E3'></td>
+            <td id='E1'></td>
+            <td id='E2'></td>
+            <td id='E3'></td>
           </tr>
           <tr>
-            <td class="tg-4a1m" id='F1'></td>
-            <td class="tg-4a1m" id='F2'></td>
-            <td class="tg-4a1m" id='F3'></td>
+            <td id='F1'></td>
+            <td id='F2'></td>
+            <td id='F3'></td>
           </tr>
           <tr>
-            <td class="tg-s2sm" id='G1'></td>
-            <td class="tg-s2sm" id='G2'></td>
-            <td class="tg-s2sm" id='G3'></td>
+            <td id='G1'></td>
+            <td id='G2'></td>
+            <td id='G3'></td>
           </tr>
           <tr>
-            <td class="tg-4a1m" id='H1'></td>
-            <td class="tg-4a1m" id='H2'></td>
-            <td class="tg-4a1m" id='H3'></td>
+            <td id='H1'></td>
+            <td id='H2'></td>
+            <td id='H3'></td>
           </tr>
           <tr>
-            <td class="tg-s2sm" id='I1'></td>
-            <td class="tg-s2sm" id='I2'></td>
-            <td class="tg-s2sm" id='I3'></td>
+            <td id='I1'></td>
+            <td id='I2'></td>
+            <td id='I3'></td>
           </tr>
           <tr>
-            <td class="tg-4a1m" id='J1'></td>
-            <td class="tg-4a1m" id='J2'></td>
-            <td class="tg-4a1m" id='J3'></td>
+            <td id='J1'></td>
+            <td id='J2'></td>
+            <td id='J3'></td>
           </tr>
           <tr>
-            <td class="tg-s2sm" id='K1'></td>
-            <td class="tg-s2sm" id='K2'></td>
-            <td class="tg-s2sm" id='K3'></td>
+            <td id='K1'></td>
+            <td id='K2'></td>
+            <td id='K3'></td>
           </tr>
           <tr>
-            <td class="tg-4a1m" id='L1'></td>
-            <td class="tg-4a1m" id='L2'></td>
-            <td class="tg-4a1m" id='L3'></td>
+            <td id='L1'></td>
+            <td id='L2'></td>
+            <td id='L3'></td>
           </tr>
           <tr>
-            <td class="tg-s2sm" id='M1'></td>
-            <td class="tg-s2sm" id='M2'></td>
-            <td class="tg-s2sm" id='M3'></td>
+            <td id='M1'></td>
+            <td id='M2'></td>
+            <td id='M3'></td>
           </tr>
           <tr>
-            <td class="tg-4a1m" id='N1'></td>
-            <td class="tg-4a1m" id='N2'></td>
-            <td class="tg-4a1m" id='N3'></td>
+            <td id='N1'></td>
+            <td id='N2'></td>
+            <td id='N3'></td>
           </tr>
         </table>
     </div>

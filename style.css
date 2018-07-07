@@ -1,0 +1,12 @@
+body {
+    overflow: hidden;
+    font-family: 'Nanum Barun Gothic';
+    font-size:1em;
+}
+#huntTable {
+    width: 100%;
+}
+
+#huntTable th#head{border-bottom: 1px solid #ccc;}
+
+#huntTable tr:nth-child(even){background-color: rgba(242,242,242,0.5);}
