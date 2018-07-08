@@ -49,25 +49,30 @@
                 for(i = 0; i < data.length; i++)
                 {
                     if(data[i].length == 7)
-                        {
-                            document.getElementById(String(alphabet[i]+1)).innerHTML = data[i][0];
-                            document.getElementById(String(alphabet[i]+2)).innerHTML = data[i][1];
-                            var percentCell = document.getElementById(String(alphabet[i]+3));
-                            var percentData = data[i][6];
-                            if(percentData.length > 3) {
+                    {
+                        document.getElementById(String(alphabet[i]+1)).innerHTML = data[i][0];
+                        document.getElementById(String(alphabet[i]+2)).innerHTML = data[i][1];
+                        var percentCell = document.getElementById(String(alphabet[i]+3));
+                        var percentData = data[i][6];
+                        if(percentData.length > 3) {
 //                                percentCell.style.fontWeight = 'bold';
-                                percentCell.style.backgroundColor = "rgba(140,38,5,0.95)";
-                            } else {
-                                percentCell.style.backgroundColor = "rgba(5,38,87,1)";
-                            }
-                            percentCell.innerHTML = percentData;
+                            percentCell.style.backgroundColor = "rgba(140,38,5,0.95)";
+                        } else {
+                            percentCell.style.backgroundColor = "rgba(5,38,87,1)";
                         }
+                        percentCell.innerHTML = percentData;
+                    }
                     else if(data[i].length == 4)
-                        {// 실종마물
-                            document.getElementById(String(alphabet[i]+1)).innerHTML = data[i][0];
+                    {// 실종 or 젠대기
+                        document.getElementById(String(alphabet[i]+1)).innerHTML = data[i][0];
+                        if(data[i][1].indexOf("실종") != -1) {
                             document.getElementById(String(alphabet[i]+2)).innerHTML = data[i][1].replace(" ▶실종◀","");
                             document.getElementById(String(alphabet[i]+3)).innerHTML = "실종";
                         }
+                        else {
+                            document.getElementById(String(alphabet[i]+3)).innerHTML = "리젠중";
+                        }
+                    }
                 }
             }
             
