@@ -25,54 +25,80 @@
             }
             function makeApiCall() {
                 var params = {
-                spreadsheetId: '1p-X4AaYuLH2ounIzjKPBYeyFtzlHUgLRh8Xqt3aMaAY',
-                range: 'B17:H30',
-                majorDimension: 'ROWS',
+                    spreadsheetId: '1p-X4AaYuLH2ounIzjKPBYeyFtzlHUgLRh8Xqt3aMaAY',
+//                  range: 'B17:H30',
+                    ranges: ["B17:H30", "J17:R22"], // 순서대로 A마물, S마물 정보
+                    majorDimension: 'ROWS',
                 };
 
-                var request = gapi.client.sheets.spreadsheets.values.get(params);
+                var request = gapi.client.sheets.spreadsheets.values.batchGet(params);
                 request.then(function(response) {
-                    // TODO: Change code below to process the `response` object:
 //                    console.log(response.result);
-//                    console.log(response.result.values[0]);
-                    updateTable(response.result.values);
+                    updateTable(response.result);
                 }, function(reason) {
                         console.error('error: ' + reason.result.error.message);
                 });
             }
             function updateTable(data) {
 //                console.log(data);
-                //0:(7) ["저지드라", "기계병정 슬립킨크스", "", " 07일 14:04 ~ 07일 16:24", "", "", "66%"]
-                //(4) ["드라구름", "아가 ▶실종◀ ", "", " 07일 07:10 ~      실종     "]
+                var tableArr = [];
                 
+                // A마물의 정보 수집
+                var dataA = data.valueRanges["0"].values;
                 var i;
-                for(i = 0; i < data.length; i++)
+                for(i = 0; i < dataA.length; i++)
                 {
-                    if(data[i].length == 7)
-                    {
-                        document.getElementById(String(alphabet[i]+1)).innerHTML = data[i][0];
-                        document.getElementById(String(alphabet[i]+2)).innerHTML = data[i][1];
-                        var percentCell = document.getElementById(String(alphabet[i]+3));
-                        var percentData = data[i][6];
-                        if(percentData.length > 3) {
-//                                percentCell.style.fontWeight = 'bold';
-                            percentCell.style.backgroundColor = "rgba(140,38,5,0.95)";
-                        } else {
-                            percentCell.style.backgroundColor = "rgba(5,38,87,1)";
-                        }
-                        percentCell.innerHTML = percentData;
+                    if(dataA[i].length == 7)
+                    {// ["저지드라", "기계병정 슬립킨크스", "", " 07일 14:04 ~ 07일 16:24", "", "", "66%"]
+                        var elem = new Array(3);
+                        elem[0] = dataA[i][0];
+                        elem[1] = dataA[i][1];
+                        elem[2] = dataA[i][6];
+                        tableArr.push(elem);
                     }
-                    else if(data[i].length == 4)
+                    else if(dataA[i].length == 4)
                     {// 실종 or 젠대기
-                        document.getElementById(String(alphabet[i]+1)).innerHTML = data[i][0];
-                        if(data[i][1].indexOf("실종") != -1) {
-                            document.getElementById(String(alphabet[i]+2)).innerHTML = data[i][1].replace(" ▶실종◀","");
-                            document.getElementById(String(alphabet[i]+3)).innerHTML = "실종";
+                        var elem = new Array(3);
+                        elem[0] = dataA[i][0];
+                        if(dataA[i][1].indexOf("실종") != -1) {
+                            elem[1] = dataA[i][1].replace(" ▶실종◀","");
+                            elem[2] = "실종";
                         }
                         else {
-                            document.getElementById(String(alphabet[i]+3)).innerHTML = "리젠중";
+                            elem[1] = dataA[i][1];
+                            elem[2] = "리젠중";
                         }
+                        tableArr.push(elem);
                     }
+                }
+                
+                // S마물의 정보 수집
+                var dataS = data.valueRanges["1"].values;
+                for(i = 0; i < dataS.length; i++)
+                {
+                    if(dataS[i].length == 9) // 4==젠중
+                    {//["홍옥해", "오키나", "", " 07일 03:11 ~ 09일 07:11", "", "", "", "", "99%"]
+                        var elem = new Array(3);
+                        elem[0] = dataS[i][0];
+                        elem[1] = dataS[i][1] + "(S)";
+                        elem[2] = dataS[i][8];
+                        tableArr.push(elem);
+                    }
+                }
+                
+                
+                // 표에 기록
+                for(i = 0; i < 14; i++)
+                {
+                    document.getElementById(String(alphabet[i]+1)).innerHTML = tableArr[i][0];
+                    document.getElementById(String(alphabet[i]+2)).innerHTML = tableArr[i][1];
+                    var percentCell = document.getElementById(String(alphabet[i]+3));
+                    if(tableArr[i][2].length > 3) {
+                        percentCell.style.backgroundColor = "rgba(140,38,5,0.95)";
+                    } else {
+                        percentCell.style.backgroundColor = "rgba(5,38,87,1)";
+                    }
+                    percentCell.innerHTML = tableArr[i][2];
                 }
             }
             
@@ -87,7 +113,7 @@
         <col style="width: 5%;">
         </colgroup>
           <tr>
-            <th id="head" colspan="3">A급 마물 시간표</th>
+            <th id="head" colspan="3">마물 시간표</th>
           </tr>
           <tr>
             <td id='A1'></td>
