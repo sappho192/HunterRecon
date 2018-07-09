@@ -106,24 +106,31 @@
                 
                 // 정렬
                 tableArr.sort(compareHunt);
+                console.log(tableArr);
                 
                 // 표에 기록
                 var bound = tableArr.length > 14 ? 14 : tableArr.length;
-                for(i = 0; i < bound; i++)
+                for(i = 0; i < 14; i++)
                 {
-                    document.getElementById(String(alphabet[i]+1)).innerHTML = tableArr[i][0];
-                    document.getElementById(String(alphabet[i]+2)).innerHTML = tableArr[i][1];
-                    var percentCell = document.getElementById(String(alphabet[i]+3));
-                    if(tableArr[i][2].length > 3) {
-                        percentCell.style.backgroundColor = "rgba(140,38,5,0.95)";
-                    } else {
-                        if(i % 2 == 1) { 
-                            percentCell.style.backgroundColor = "rgb(19,49,95)";
+                    if(i < bound) {
+                        document.getElementById(String(alphabet[i]+1)).innerHTML = tableArr[i][0];
+                        document.getElementById(String(alphabet[i]+2)).innerHTML = tableArr[i][1];
+                        var percentCell = document.getElementById(String(alphabet[i]+3));
+                        if(tableArr[i][2].length > 3) {
+                            percentCell.style.backgroundColor = "rgba(140,38,5,0.95)";
                         } else {
-                            percentCell.style.backgroundColor = "rgb(5,38,87)";
+                            if(i % 2 == 1) { 
+                                percentCell.style.backgroundColor = "rgb(19,49,95)";
+                            } else {
+                                percentCell.style.backgroundColor = "rgb(5,38,87)";
+                            }
                         }
+                        percentCell.innerHTML = tableArr[i][2];
+                    } else {
+                        document.getElementById(String(alphabet[i]+1)).innerHTML = "";
+                        document.getElementById(String(alphabet[i]+2)).innerHTML = "";
+                        document.getElementById(String(alphabet[i]+3)).innerHTML = "";
                     }
-                    percentCell.innerHTML = tableArr[i][2];
                 }
             }
             function updateSInfo(dataS, tableArr) {
