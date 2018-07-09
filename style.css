@@ -1,8 +1,8 @@
 body {
     overflow: hidden;
     font-family: 'Nanum Barun Gothic';
-    color: #AACCFF;
-    background-color: rgba(5, 38, 87, 0.95);
+    color: #F0F0F0;
+    background-color: rgba(5, 38, 87, 0.80);
 }
 #huntTableA {
     font-size: 0.7em;
@@ -14,7 +14,7 @@ body {
 #huntTableA tr:nth-child(even){background-color: rgba(5, 38, 87, 1);}
 
 .btn {
-    background-color: rgb(19, 49, 95);
+    background-color: rgb(55, 81, 120);
     border: none;
 }
 
