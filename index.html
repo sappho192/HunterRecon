@@ -15,7 +15,10 @@
             <div class="mdOptionContent">
                 <label class="container">
                     <input type="checkbox" id="cbShowSInfo" checked="checked" onchange="optionSChanged(this)">
-                    <span class="checkmark"></span>S마물 표시</label>
+                    <span class="checkmark"></span>S마물 표시</label><br/>
+                <label class="container">
+                    <input type="checkbox" id="cbShowHardSInfo" checked="checked" onchange="optionHardSChanged(this)">
+                    <span class="checkmark"></span>150%를 넘긴 S마물 표시</label>
             </div>
         </div>
         <div id="huntDivA" style="width: 180px">
@@ -104,14 +107,23 @@
             gapi.load('client', initClient);
             var alphabet = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N"];
             var showSInfo = true;
+            var showHardSInfo = true;
             if (storageAvailable('localStorage')) {
                 if(!localStorage.getItem('showsinfo')) {
                     // initial stage
                     console.log("Creating option data");
                     localStorage.setItem('showsinfo', showSInfo);
                 }
+                if(!localStorage.getItem('showhardsinfo')) {
+                    // initial stage
+                    console.log("Creating option data");
+                    localStorage.setItem('showhardsinfo', showSInfo);
+                }
                 showSInfo = JSON.parse(localStorage.getItem('showsinfo'));
+                showHardSInfo = JSON.parse(localStorage.getItem('showhardsinfo'));
+                
                 document.getElementById("cbShowSInfo").checked = JSON.parse(showSInfo);
+                document.getElementById("cbShowHardSInfo").checked = JSON.parse(showHardSInfo);                
             } else {
                 console.error("Couldn't load localStorage");
             }
@@ -153,6 +165,11 @@
             function optionSChanged(element) {
                 showSInfo = element.checked;
                 localStorage.setItem('showsinfo', showSInfo);
+                initClient();
+            }
+            function optionHardSChanged(element) {
+                showHardSInfo = element.checked;
+                localStorage.setItem('showhardsinfo', showHardSInfo);
                 initClient();
             }
 
@@ -230,9 +247,7 @@
                 }
                 
                 // 정렬
-                console.log(tableArr);
                 tableArr.sort(compareHunt);
-                console.log(tableArr);
                 
                 // 표에 기록
                 var bound = tableArr.length > 14 ? 14 : tableArr.length;
@@ -264,11 +279,16 @@
                 {
                     if(dataS[i].length == 9) // 4==젠중
                     {//["홍옥해", "오키나", "", " 07일 03:11 ~ 09일 07:11", "", "", "", "", "99%"]
-                        var elem = new Array(3);
-                        elem[0] = dataS[i][0];
-                        elem[1] = dataS[i][1] + "(S)";
-                        elem[2] = dataS[i][8];
-                        tableArr.push(elem);
+                        if(parseFloat(dataS[i][8]) > 150 && !showHardSInfo) {
+                            // skip
+                            console.log(dataS[i][0] + ":" + dataS[i][8]);
+                        } else {
+                            var elem = new Array(3);
+                            elem[0] = dataS[i][0];
+                            elem[1] = dataS[i][1] + "(S)";
+                            elem[2] = dataS[i][8];
+                            tableArr.push(elem);
+                        }
                     }
                 }
             }
