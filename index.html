@@ -10,12 +10,136 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-nanum-barun-gothic@1.0.0/nanumbarungothic.min.css">
     </head>
     <body>
+<!--    <div><input type="button" onclick="initClient();" value="수동갱신" /></div>-->
+        <div id="mdOption" class="modal">
+            <div class="mdOptionContent">
+                <label class="container">
+                    <input type="checkbox" id="cbShowSInfo" checked="checked" onchange="optionSChanged(this)">
+                    <span class="checkmark"></span>S마물 표시</label>
+            </div>
+        </div>
+        <div id="huntDivA" style="width: 180px">
+            <table id="huntTableA">
+            <colgroup>
+            <col style="width: 30%;">
+            <col style="width: 65%;">
+            <col style="width: 5%;">
+            </colgroup>
+              <tr>
+                <th id="head" colspan="3"><span>마물 시간표</span><span class="bt"><button class="btn" onclick="showOption()" id="btOption"><i class="fa fa-cog fa-2x white"></i></button></span></th>
+              </tr>
+              <tr>
+                <td id='A1'></td>
+                <td id='A2'></td>
+                <td id='A3'></td>
+              </tr>
+              <tr>
+                <td id='B1'></td>
+                <td id='B2'></td>
+                <td id='B3'></td>
+              </tr>
+              <tr>
+                <td id='C1'></td>
+                <td id='C2'></td>
+                <td id='C3'></td>
+              </tr>
+              <tr>
+                <td id='D1'></td>
+                <td id='D2'></td>
+                <td id='D3'></td>
+              </tr>
+              <tr>
+                <td id='E1'></td>
+                <td id='E2'></td>
+                <td id='E3'></td>
+              </tr>
+              <tr>
+                <td id='F1'></td>
+                <td id='F2'></td>
+                <td id='F3'></td>
+              </tr>
+              <tr>
+                <td id='G1'></td>
+                <td id='G2'></td>
+                <td id='G3'></td>
+              </tr>
+              <tr>
+                <td id='H1'></td>
+                <td id='H2'></td>
+                <td id='H3'></td>
+              </tr>
+              <tr>
+                <td id='I1'></td>
+                <td id='I2'></td>
+                <td id='I3'></td>
+              </tr>
+              <tr>
+                <td id='J1'></td>
+                <td id='J2'></td>
+                <td id='J3'></td>
+              </tr>
+              <tr>
+                <td id='K1'></td>
+                <td id='K2'></td>
+                <td id='K3'></td>
+              </tr>
+              <tr>
+                <td id='L1'></td>
+                <td id='L2'></td>
+                <td id='L3'></td>
+              </tr>
+              <tr>
+                <td id='M1'></td>
+                <td id='M2'></td>
+                <td id='M3'></td>
+              </tr>
+              <tr>
+                <td id='N1'></td>
+                <td id='N2'></td>
+                <td id='N3'></td>
+              </tr>
+            </table>
+        </div>
         <script>
             gapi.load('client', initClient);
             var alphabet = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N"];
             var showSInfo = true;
+            if (storageAvailable('localStorage')) {
+                if(!localStorage.getItem('showsinfo')) {
+                    // initial stage
+                    console.log("Creating option data");
+                    localStorage.setItem('showsinfo', showSInfo);
+                }
+                showSInfo = JSON.parse(localStorage.getItem('showsinfo'));
+                document.getElementById("cbShowSInfo").checked = JSON.parse(showSInfo);
+            } else {
+                console.error("Couldn't load localStorage");
+            }
             
-            // Modal related functions
+            // Options Modal related functions
+            function storageAvailable(type) {
+                try {
+                    var storage = window[type],
+                        x = '__storage_test__';
+                    storage.setItem(x, x);
+                    storage.removeItem(x);
+                    return true;
+                }
+                catch(e) {
+                    return e instanceof DOMException && (
+                        // Firefox를 제외한 모든 브라우저
+                        e.code === 22 ||
+                        // Firefox
+                        e.code === 1014 ||
+                        // 코드가 존재하지 않을 수도 있기 때문에 테스트 이름 필드도 있습니다.
+                        // Firefox를 제외한 모든 브라우저
+                        e.name === 'QuotaExceededError' ||
+                        // Firefox
+                        e.name === 'NS_ERROR_DOM_QUOTA_REACHED') &&
+                        // 이미 저장된 것이있는 경우에만 QuotaExceededError를 확인하십시오.
+                        storage.length !== 0;
+                }
+            }
             window.onclick = function(event) {
                 var mdOpt = document.getElementById("mdOption");
                 if(event.target == mdOpt) {
@@ -28,6 +152,7 @@
             }
             function optionSChanged(element) {
                 showSInfo = element.checked;
+                localStorage.setItem('showsinfo', showSInfo);
                 initClient();
             }
 
@@ -148,95 +273,5 @@
             
             setInterval(initClient, 30000);
         </script>
-<!--    <div><input type="button" onclick="initClient();" value="수동갱신" /></div>-->
-        <div id="mdOption" class="modal">
-            <div class="mdOptionContent">
-                <label class="container">
-                    <input type="checkbox" checked="checked" onchange="optionSChanged(this)">
-                    <span class="checkmark"></span>S마물 표시</label>
-            </div>
-        </div>
-        <div id="huntDivA" style="width: 180px">
-            <table id="huntTableA">
-            <colgroup>
-            <col style="width: 30%;">
-            <col style="width: 65%;">
-            <col style="width: 5%;">
-            </colgroup>
-              <tr>
-                <th id="head" colspan="3"><span>마물 시간표</span><span class="bt"><button class="btn" onclick="showOption()" id="btOption"><i class="fa fa-cog fa-2x white"></i></button></span></th>
-              </tr>
-              <tr>
-                <td id='A1'></td>
-                <td id='A2'></td>
-                <td id='A3'></td>
-              </tr>
-              <tr>
-                <td id='B1'></td>
-                <td id='B2'></td>
-                <td id='B3'></td>
-              </tr>
-              <tr>
-                <td id='C1'></td>
-                <td id='C2'></td>
-                <td id='C3'></td>
-              </tr>
-              <tr>
-                <td id='D1'></td>
-                <td id='D2'></td>
-                <td id='D3'></td>
-              </tr>
-              <tr>
-                <td id='E1'></td>
-                <td id='E2'></td>
-                <td id='E3'></td>
-              </tr>
-              <tr>
-                <td id='F1'></td>
-                <td id='F2'></td>
-                <td id='F3'></td>
-              </tr>
-              <tr>
-                <td id='G1'></td>
-                <td id='G2'></td>
-                <td id='G3'></td>
-              </tr>
-              <tr>
-                <td id='H1'></td>
-                <td id='H2'></td>
-                <td id='H3'></td>
-              </tr>
-              <tr>
-                <td id='I1'></td>
-                <td id='I2'></td>
-                <td id='I3'></td>
-              </tr>
-              <tr>
-                <td id='J1'></td>
-                <td id='J2'></td>
-                <td id='J3'></td>
-              </tr>
-              <tr>
-                <td id='K1'></td>
-                <td id='K2'></td>
-                <td id='K3'></td>
-              </tr>
-              <tr>
-                <td id='L1'></td>
-                <td id='L2'></td>
-                <td id='L3'></td>
-              </tr>
-              <tr>
-                <td id='M1'></td>
-                <td id='M2'></td>
-                <td id='M3'></td>
-              </tr>
-              <tr>
-                <td id='N1'></td>
-                <td id='N2'></td>
-                <td id='N3'></td>
-              </tr>
-            </table>
-        </div>
     </body>
 </html>
