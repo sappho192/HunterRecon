@@ -68,16 +68,12 @@
                     else if(dataA[i].length == 4)
                     {// 실종 or 젠대기
                         var elem = new Array(3);
-                        elem[0] = dataA[i][0];
                         if(dataA[i][1].indexOf("실종") != -1) {
+                            elem[0] = dataA[i][0];
                             elem[1] = dataA[i][1].replace(" ▶실종◀","");
                             elem[2] = "실종";
+                            tableArr.push(elem);
                         }
-                        else {
-                            elem[1] = dataA[i][1];
-                            elem[2] = "리젠중";
-                        }
-                        tableArr.push(elem);
                     }
                 }
                 
