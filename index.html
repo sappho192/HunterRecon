@@ -6,12 +6,32 @@
         <script src="https://apis.google.com/js/api.js"></script>
         <link rel="author" href="https://github.com/sappho192/HunterRecon">
         <link rel="stylesheet" type="text/css" href="style.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-nanum-barun-gothic@1.0.0/nanumbarungothic.min.css">
     </head>
     <body>
         <script>
             gapi.load('client', initClient);
             var alphabet = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N"];
+            var showSInfo = true;
+            
+            // Modal related functions
+            window.onclick = function(event) {
+                var mdOpt = document.getElementById("mdOption");
+                if(event.target == mdOpt) {
+                    mdOpt.style.display = "none";
+                }
+            }
+            function showOption() {
+                var mdOpt = document.getElementById("mdOption");
+                mdOpt.style.display = "block";
+            }
+            function optionSChanged(element) {
+                console.log(element.checked);
+                showSInfo = element.checked;
+                initClient();
+            }
+
             function initClient() {
                 var API_KEY = 'AIzaSyAxFo4vumR9TLX-0-5zUaUbzXdY7mzDhOk';
                 var CLIENT_ID = '17741540562-l3u3pptf45khhkpv103e7737imama9b1.apps.googleusercontent.com';
@@ -42,11 +62,13 @@
                 });
             }
             function compareHunt(a, b) {
+                
                 if(parseFloat(a[2]) < parseFloat(b[2])) {
                     return 1;
                 } if (parseFloat(a[2]) > parseFloat(b[2])) {
                     return -1;
-                } return 0;
+                }
+                return 0;
             }
             function updateTable(data) {
 //                console.log(data);
@@ -78,7 +100,33 @@
                 }
                 
                 // S마물의 정보 수집
-                var dataS = data.valueRanges["1"].values;
+                if(showSInfo == true) {
+                    updateSInfo(data.valueRanges["1"].values, tableArr);
+                }
+                
+                // 정렬
+                tableArr.sort(compareHunt);
+                
+                // 표에 기록
+                var bound = tableArr.length > 14 ? 14 : tableArr.length;
+                for(i = 0; i < bound; i++)
+                {
+                    document.getElementById(String(alphabet[i]+1)).innerHTML = tableArr[i][0];
+                    document.getElementById(String(alphabet[i]+2)).innerHTML = tableArr[i][1];
+                    var percentCell = document.getElementById(String(alphabet[i]+3));
+                    if(tableArr[i][2].length > 3) {
+                        percentCell.style.backgroundColor = "rgba(140,38,5,0.95)";
+                    } else {
+                        if(i % 2 == 1) { 
+                            percentCell.style.backgroundColor = "rgb(19,49,95)";
+                        } else {
+                            percentCell.style.backgroundColor = "rgb(5,38,87)";
+                        }
+                    }
+                    percentCell.innerHTML = tableArr[i][2];
+                }
+            }
+            function updateSInfo(dataS, tableArr) {
                 for(i = 0; i < dataS.length; i++)
                 {
                     if(dataS[i].length == 9) // 4==젠중
@@ -90,109 +138,99 @@
                         tableArr.push(elem);
                     }
                 }
-                
-                // 정렬
-                tableArr.sort(compareHunt);
-                
-                // 표에 기록
-                for(i = 0; i < 14; i++)
-                {
-                    document.getElementById(String(alphabet[i]+1)).innerHTML = tableArr[i][0];
-                    document.getElementById(String(alphabet[i]+2)).innerHTML = tableArr[i][1];
-                    var percentCell = document.getElementById(String(alphabet[i]+3));
-                    if(tableArr[i][2].length > 3) {
-                        percentCell.style.backgroundColor = "rgba(140,38,5,0.95)";
-                    } else {
-                        percentCell.style.backgroundColor = "rgba(5,38,87,1)";
-                    }
-                    percentCell.innerHTML = tableArr[i][2];
-                }
             }
             
             setInterval(initClient, 30000);
         </script>
 <!--    <div><input type="button" onclick="initClient();" value="수동갱신" /></div>-->
-    <div id="huntDivA" style="width: 180px">
-        <table id="huntTableA">
-        <colgroup>
-        <col style="width: 30%;">
-        <col style="width: 65%;">
-        <col style="width: 5%;">
-        </colgroup>
-          <tr>
-            <th id="head" colspan="3">마물 시간표</th>
-          </tr>
-          <tr>
-            <td id='A1'></td>
-            <td id='A2'></td>
-            <td id='A3'></td>
-          </tr>
-          <tr>
-            <td id='B1'></td>
-            <td id='B2'></td>
-            <td id='B3'></td>
-          </tr>
-          <tr>
-            <td id='C1'></td>
-            <td id='C2'></td>
-            <td id='C3'></td>
-          </tr>
-          <tr>
-            <td id='D1'></td>
-            <td id='D2'></td>
-            <td id='D3'></td>
-          </tr>
-          <tr>
-            <td id='E1'></td>
-            <td id='E2'></td>
-            <td id='E3'></td>
-          </tr>
-          <tr>
-            <td id='F1'></td>
-            <td id='F2'></td>
-            <td id='F3'></td>
-          </tr>
-          <tr>
-            <td id='G1'></td>
-            <td id='G2'></td>
-            <td id='G3'></td>
-          </tr>
-          <tr>
-            <td id='H1'></td>
-            <td id='H2'></td>
-            <td id='H3'></td>
-          </tr>
-          <tr>
-            <td id='I1'></td>
-            <td id='I2'></td>
-            <td id='I3'></td>
-          </tr>
-          <tr>
-            <td id='J1'></td>
-            <td id='J2'></td>
-            <td id='J3'></td>
-          </tr>
-          <tr>
-            <td id='K1'></td>
-            <td id='K2'></td>
-            <td id='K3'></td>
-          </tr>
-          <tr>
-            <td id='L1'></td>
-            <td id='L2'></td>
-            <td id='L3'></td>
-          </tr>
-          <tr>
-            <td id='M1'></td>
-            <td id='M2'></td>
-            <td id='M3'></td>
-          </tr>
-          <tr>
-            <td id='N1'></td>
-            <td id='N2'></td>
-            <td id='N3'></td>
-          </tr>
-        </table>
-    </div>
+        <div id="mdOption" class="modal">
+            <div class="mdOptionContent">
+                <label class="container">
+                    <input type="checkbox" checked="checked" onchange="optionSChanged(this)">
+                    <span class="checkmark"></span>S마물 표시</label>
+            </div>
+        </div>
+        <div id="huntDivA" style="width: 180px">
+            <table id="huntTableA">
+            <colgroup>
+            <col style="width: 30%;">
+            <col style="width: 65%;">
+            <col style="width: 5%;">
+            </colgroup>
+              <tr>
+                <th id="head" colspan="3"><span>마물 시간표</span><span class="bt"><button class="btn" onclick="showOption()" id="btOption"><i class="fa fa-cog fa-2x white"></i></button></span></th>
+              </tr>
+              <tr>
+                <td id='A1'></td>
+                <td id='A2'></td>
+                <td id='A3'></td>
+              </tr>
+              <tr>
+                <td id='B1'></td>
+                <td id='B2'></td>
+                <td id='B3'></td>
+              </tr>
+              <tr>
+                <td id='C1'></td>
+                <td id='C2'></td>
+                <td id='C3'></td>
+              </tr>
+              <tr>
+                <td id='D1'></td>
+                <td id='D2'></td>
+                <td id='D3'></td>
+              </tr>
+              <tr>
+                <td id='E1'></td>
+                <td id='E2'></td>
+                <td id='E3'></td>
+              </tr>
+              <tr>
+                <td id='F1'></td>
+                <td id='F2'></td>
+                <td id='F3'></td>
+              </tr>
+              <tr>
+                <td id='G1'></td>
+                <td id='G2'></td>
+                <td id='G3'></td>
+              </tr>
+              <tr>
+                <td id='H1'></td>
+                <td id='H2'></td>
+                <td id='H3'></td>
+              </tr>
+              <tr>
+                <td id='I1'></td>
+                <td id='I2'></td>
+                <td id='I3'></td>
+              </tr>
+              <tr>
+                <td id='J1'></td>
+                <td id='J2'></td>
+                <td id='J3'></td>
+              </tr>
+              <tr>
+                <td id='K1'></td>
+                <td id='K2'></td>
+                <td id='K3'></td>
+              </tr>
+              <tr>
+                <td id='L1'></td>
+                <td id='L2'></td>
+                <td id='L3'></td>
+              </tr>
+              <tr>
+                <td id='M1'></td>
+                <td id='M2'></td>
+                <td id='M3'></td>
+              </tr>
+              <tr>
+                <td id='N1'></td>
+                <td id='N2'></td>
+                <td id='N3'></td>
+              </tr>
+            </table>
+        </div>
     </body>
 </html>
