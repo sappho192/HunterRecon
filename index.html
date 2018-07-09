@@ -27,7 +27,6 @@
                 mdOpt.style.display = "block";
             }
             function optionSChanged(element) {
-                console.log(element.checked);
                 showSInfo = element.checked;
                 initClient();
             }
@@ -106,7 +105,7 @@
                 
                 // 정렬
                 tableArr.sort(compareHunt);
-                console.log(tableArr);
+//                console.log(tableArr);
                 
                 // 표에 기록
                 var bound = tableArr.length > 14 ? 14 : tableArr.length;
