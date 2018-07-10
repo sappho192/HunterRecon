@@ -119,84 +119,9 @@
                 "TON" : "톤베리",
                 "MOG" : "모그리"
             };
-            
-            var areaAInfo = {
-                "못생긴 보가쟈":"중부라노",
-                "웅크테히":"저지라노",
-                "마도 지옥손아귀":"동부라노",
-                "난":"서부라노",
-                "마베리":"고지라노",
-                "콘누":"외지라노",
-                "포르네우스":"중부삼림",
-                "녹아내리는 젤리":"동부삼림",
-                "게데":"남부삼림",
-                "기르타브":"북부삼림",
-                "알렉트리온":"서부다날",
-                "사보텐더 무희":"중부다날",
-                "마헤스":"동부다날",
-                "자니고":"남부다날",
-                "마지막 투혼":"북부다날",
-                "쿠레아":"모르도나",
-                "머라쿠":"커르중앙",
-                "미르카":"커르서부",
-                "류바":"커르서부",
-                "엔켈라도스":"아발구름",
-                "시시우틀":"아발구름",
-                "캠파크티":"아지스라",
-                "악취화":"아지스라",
-                "파일라스터":"고지드라",
-                "와이번 로드":"고지드라",
-                "기계병정 슬립킨크스":"저지드라",
-                "스톨라스":"저지드라",
-                "부네":"드라구름",
-                "아가토스":"드라구름",
-                "오르쿠스":"기라변방",
-                "얼":"기라변방",
-                "보크스타인":"기라산악",
-                "아크라부아멜루":"기라산악",
-                "마히샤":"기라호반",
-                "루미나레":"기라호반",
-                "선박 유령":"홍옥해",
-                "귀신 꿈고둥":"홍옥해",
-                "가자수라":"얀샤",
-                "앙가다":"얀샤",
-                "기리메칼라":"아짐초원",
-                "솜":"아짐초원"
-            };
-            var areaSInfo = {
-                "크로크 미테느":"중부라노",
-                "개굴개로스":"저지라노",
-                "갈록":"동부라노",
-                "보나콘":"서부라노",
-                "난디":"고지라노",
-                "체르노보그":"외지라노",
-                "레드로네트":"중부삼림",
-                "울가루":"동부삼림",
-                "정신지배자":"남부삼림",
-                "천갈래덩굴 세다":"북부삼림",
-                "조나 시커":"서부다날",
-                "브론테스":"중부다날",
-                "발라우르":"동부다날",
-                "느뉴느위":"남부다날",
-                "미뇨카온":"북부다날",
-                "아그리파":"모르도나",
-                "사파트":"커르중앙",
-                "카이저 베히모스":"커르서부",
-                "극락조":"아발구름",
-                "레우크로타":"아지스라",
-                "센무르":"고지드라",
-                "창백의 기수":"저지드라",
-                "간다르바":"드라구름",
-                "우담바라":"기라변방",
-                "해골거미":"기라산악",
-                "빛과 소금":"기라호반",
-                "오키나":"홍옥해",
-                "감마":"얀샤",
-                "오르가나":"아짐초원"
-            };
-            
+
 //            localStorage.clear(); // option test
-            var server = SERVER.CHO;
+            var server = SERVER.TON;
             var showSInfo = true;
             var showHardSInfo = true;
             if (storageAvailable('localStorage')) {
@@ -320,38 +245,33 @@
                 
                 if(server == SERVER.CAR) {
                     params = {
-                        spreadsheetId: '1p-X4AaYuLH2ounIzjKPBYeyFtzlHUgLRh8Xqt3aMaAY',
-                        ranges: showSInfo ? ["C17:H57", "K17:R29"] : ["C17:H57"], // 순서대로 A+S마물, A마물 정보
+                        spreadsheetId: '1JsIR4Lms7FvJtfvWV0BU35n1rwmUS-F_eIRfiBdceTc',
+                        ranges: showSInfo ? ["Timer!B13:H53", "Timer!J13:R25"] : ["Timer!B13:H53"], // 순서대로 A+S마물, A마물 정보
                         majorDimension: 'ROWS',
                     };
                 } else if(server == SERVER.CHO) {
                     params = {
-                        spreadsheetId: '1_mI3CkLMse4v1862UejPWweP7mbq0fVOZ-wQrVzHGAM',
-                        ranges: showSInfo ? ["[전서버] Simple 마물 시간표!B13:H53", "[전서버] Simple 마물 시간표!J13:R25"] : ["[전서버] Simple 마물 시간표!B13:H53"],
+                        spreadsheetId: '1JsIR4Lms7FvJtfvWV0BU35n1rwmUS-F_eIRfiBdceTc',
+                        ranges: showSInfo ? ["Timer!T13:Z53", "Timer!AB13:AJ25"] : ["Timer!T13:Z53"],
                         majorDimension: 'ROWS',
                     };                    
                 } else if(server == SERVER.MOG) {
                     params = {
-                        spreadsheetId: '1_mI3CkLMse4v1862UejPWweP7mbq0fVOZ-wQrVzHGAM',
-                        ranges: showSInfo ? ["[전서버] Simple 마물 시간표!T13:Z53", "[전서버] Simple 마물 시간표!AB13:AJ25"] : ["[전서버] Simple 마물 시간표!T13:Z53"],
+                        spreadsheetId: '1JsIR4Lms7FvJtfvWV0BU35n1rwmUS-F_eIRfiBdceTc',
+                        ranges: showSInfo ? ["Timer!AL13:AR53", "Timer!AT13:BB25"] : ["Timer!AL13:AR53"],
                         majorDimension: 'ROWS',
                     };     
                 } else if(server == SERVER.TON) {
                     params = {
-                        spreadsheetId: '1_mI3CkLMse4v1862UejPWweP7mbq0fVOZ-wQrVzHGAM',
-                        ranges: showSInfo ? ["[전서버] Simple 마물 시간표!AL13:AR53", "[전서버] Simple 마물 시간표!AT13:BB25"] : ["[전서버] Simple 마물 시간표!AL13:AR53"],
+                        spreadsheetId: '1JsIR4Lms7FvJtfvWV0BU35n1rwmUS-F_eIRfiBdceTc',
+                        ranges: showSInfo ? ["Timer!BD13:BJ53", "Timer!BL13:BT25"] : ["Timer!BD13:BJ53"],
                         majorDimension: 'ROWS',
                     };
                 }
 
                 var request = gapi.client.sheets.spreadsheets.values.batchGet(params);
                 request.then(function(response) {
-//                    console.log(response.result);
-                    if(server == SERVER.CAR) {// 시트 형식이 달라 따로 보냄
-                        updateTable(response.result);
-                    } else {
-                        updateTable2(response.result);
-                    }
+                    updateTable(response.result);
                 }, function(reason) {
                         console.error('error: ' + reason.result.error.message);
                 });
@@ -375,20 +295,20 @@
                 var i;
                 for(i = 0; i < dataA.length; i++)
                 {
-                    if(dataA[i].length == 6)
-                    {// [기계병정 슬립킨크스", "", " 07일 14:04 ~ 07일 16:24", "", "", "66%"]
+                    if(dataA[i].length == 7)
+                    {// ["저지드라", "기계병정 슬립킨크스", "", " 07일 14:04 ~ 07일 16:24", "", "", "66%"]
                         var elem = new Array(3);
-                        elem[0] = areaAInfo[dataA[i][0]];
-                        elem[1] = dataA[i][0];
-                        elem[2] = dataA[i][5];
+                        elem[0] = dataA[i][0];
+                        elem[1] = dataA[i][1];
+                        elem[2] = dataA[i][6];
                         tableArr.push(elem);
                     }
-                    else if(dataA[i].length == 3)
+                    else if(dataA[i].length == 4)
                     {// 실종 or 젠대기
                         var elem = new Array(3);
                         if(dataA[i][1].indexOf("실종") != -1) {
-                            elem[0] = areaAInfo[dataA[i][0]];
-                            elem[1] = dataA[i][0].replace(" ▶실종◀","");
+                            elem[0] =dataA[i][0];
+                            elem[1] = dataA[i][1].replace(" ▶실종◀","");
                             elem[2] = "실종";
                             tableArr.push(elem);
                         }
@@ -431,96 +351,16 @@
             function updateSInfo(dataS, tableArr) {
                 for(i = 0; i < dataS.length; i++)
                 {
-                    if(dataS[i].length == 8) // 4==젠중
+                    if(dataS[i].length == 7) // 4==젠중
                     {//["오키나", "", " 07일 03:11 ~ 09일 07:11", "", "", "", "", "99%"]
-                        if(parseFloat(dataS[i][7]) > 150 && !showHardSInfo) {
+                        if(parseFloat(dataS[i][6]) > 150 && !showHardSInfo) {
                             // skip
 //                            console.log(dataS[i][0] + ":" + dataS[i][7]);
                         } else {
                             var elem = new Array(3);
-                            elem[0] = areaSInfo[dataS[i][0]];
-                            elem[1] = dataS[i][0] + "(S)";
-                            elem[2] = dataS[i][7];
-                            tableArr.push(elem);
-//                            console.log(elem);
-                        }
-                    }
-                }
-            }
-            function updateTable2(data) {
-//                console.log(data);
-                var tableArr = [];
-                
-                // A마물의 정보 수집
-                var dataA = data.valueRanges["0"].values;
-                var i;
-                for(i = 0; i < dataA.length; i++)
-                {
-                    if(dataA[i].length == 7)
-                    {// ["포르네우스", "", " 08일 16:00 ~ 08일 17:00", "", "", "", "999%"]
-                        var elem = new Array(3);
-                        elem[0] = areaAInfo[dataA[i][0]];
-                        elem[1] = dataA[i][0];
-                        elem[2] = dataA[i][6];
-                        tableArr.push(elem);
-                    }
-                    else if(dataA[i].length == 4) // 이 부분 확인 필요
-                    {// 실종 or 젠대기
-                        var elem = new Array(3);
-                        if(dataA[i][1].indexOf("실종") != -1) {
-                            elem[0] = areaAInfo[dataA[i][0]];
-                            elem[1] = dataA[i][0].replace(" ▶실종◀","");
-                            elem[2] = "실종";
-                            tableArr.push(elem);
-                        }
-                    }
-                }
-                
-                // S마물의 정보 수집
-                if(showSInfo == true) {
-                    updateSInfo2(data.valueRanges["1"].values, tableArr);
-                }
-                
-                // 정렬
-                tableArr.sort(compareHunt);
-                
-                // 표에 기록
-                var bound = tableArr.length > 14 ? 14 : tableArr.length;
-                for(i = 0; i < 14; i++)
-                {
-                    if(i < bound) {
-                        document.getElementById(String(alphabet[i]+1)).innerHTML = tableArr[i][0];
-                        document.getElementById(String(alphabet[i]+2)).innerHTML = tableArr[i][1];
-                        var percentCell = document.getElementById(String(alphabet[i]+3));
-                        if(tableArr[i][2].length > 3) {
-                            percentCell.style.backgroundColor = "rgba(140,38,5,0.95)";
-                        } else {
-                            if(i % 2 == 1) { 
-                                percentCell.style.backgroundColor = "rgb(55,81,120)";
-                            } else {
-                                percentCell.style.backgroundColor = "rgb(5,38,87)";
-                            }
-                        }
-                        percentCell.innerHTML = tableArr[i][2];
-                    } else {
-                        document.getElementById(String(alphabet[i]+1)).innerHTML = "";
-                        document.getElementById(String(alphabet[i]+2)).innerHTML = "";
-                        document.getElementById(String(alphabet[i]+3)).innerHTML = "";
-                    }
-                }
-            }
-            function updateSInfo2(dataS, tableArr) {
-                for(i = 0; i < dataS.length; i++)
-                {
-                    if(dataS[i].length == 9) // 4==젠중
-                    {//["느뉴느위", "", "", " 09일 17:34 ~ 10일 03:34", "", "", "", "", "207%"]
-                        if(parseFloat(dataS[i][7]) > 150 && !showHardSInfo) {
-                            // skip
-                        } else {
-                            var elem = new Array(3);
-                            elem[0] = areaSInfo[dataS[i][0]];
-                            elem[1] = dataS[i][0] + "(S)";
-                            elem[2] = dataS[i][8];
+                            elem[0] = dataS[i][0];
+                            elem[1] = dataS[i][1] + "(S)";
+                            elem[2] = dataS[i][6];
                             tableArr.push(elem);
 //                            console.log(elem);
                         }
