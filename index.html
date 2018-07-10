@@ -13,12 +13,12 @@
 <!--    <div><input type="button" onclick="initClient();" value="수동갱신" /></div>-->
         <div id="mdOption" class="modal">
             <div class="mdOptionContent">
-                <select id="slServer" onchange="selectServerChanged()">
+                <i class="fa fa-toggle-left fa-2x" onclick="prevServer()"></i><select id="slServer" onchange="selectServerChanged()" disabled>
                     <option value="초코보">초코보</option>
                     <option value="모그리">모그리</option>
                     <option value="카벙클">카벙클</option>
                     <option value="톤베리">톤베리</option>
-                </select>서버의 마물을 표시<br/>
+                </select><i class="fa fa-toggle-right fa-2x" onclick="nextServer()"></i>서버의 마물을 표시<br/>
                 <label class="container">
                     <input type="checkbox" id="cbShowSInfo" checked="checked" onchange="optionSChanged(this)">
                     <span class="checkmark"></span>S마물 표시</label><br/>
@@ -278,6 +278,20 @@
                 localStorage.setItem('server', server);
                 document.getElementById("spServerName").innerHTML = "(" + server + ")";
                 initClient();
+            }
+            function prevServer() {
+                var selServer = document.getElementById("slServer");
+                if(selServer.selectedIndex > 0) {
+                    selServer.selectedIndex = selServer.selectedIndex - 1;
+                }
+                selectServerChanged();
+            }
+            function nextServer() {
+                var selServer = document.getElementById("slServer");
+                if(selServer.selectedIndex < 3) {
+                    selServer.selectedIndex = selServer.selectedIndex + 1;
+                }
+                selectServerChanged();
             }
             
             function initClient() {
