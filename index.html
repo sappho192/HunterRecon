@@ -354,14 +354,14 @@
                     {//["오키나", "", " 07일 03:11 ~ 09일 07:11", "", "", "", "", "99%"]
                         if(parseFloat(dataS[i][7]) > 150 && !showHardSInfo) {
                             // skip
-                            console.log(dataS[i][0] + ":" + dataS[i][7]);
+//                            console.log(dataS[i][0] + ":" + dataS[i][7]);
                         } else {
                             var elem = new Array(3);
                             elem[0] = areaSInfo[dataS[i][0]];
                             elem[1] = dataS[i][0] + "(S)";
                             elem[2] = dataS[i][7];
                             tableArr.push(elem);
-                            console.log(elem);
+//                            console.log(elem);
                         }
                     }
                 }
