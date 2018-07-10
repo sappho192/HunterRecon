@@ -12,19 +12,19 @@
     <body>
 <!--    <div><input type="button" onclick="initClient();" value="수동갱신" /></div>-->
         <div id="mdOption" class="modal">
-            <div class="mdOptionContent">
+            <div class="mdOptionContent"><span style="font-size: 1.4em">서버:</span>
                 <i class="fa fa-toggle-left fa-2x" onclick="prevServer()"></i><select id="slServer" onchange="selectServerChanged()" disabled>
                     <option value="초코보">초코보</option>
                     <option value="모그리">모그리</option>
                     <option value="카벙클">카벙클</option>
                     <option value="톤베리">톤베리</option>
-                </select><i class="fa fa-toggle-right fa-2x" onclick="nextServer()"></i>서버의 마물을 표시<br/>
+                </select><i class="fa fa-toggle-right fa-2x" onclick="nextServer()"></i><br/>
                 <label class="container">
                     <input type="checkbox" id="cbShowSInfo" checked="checked" onchange="optionSChanged(this)">
                     <span class="checkmark"></span>S마물 표시</label><br/>
                 <label class="container">
                     <input type="checkbox" id="cbShowHardSInfo" checked="checked" onchange="optionHardSChanged(this)">
-                    <span class="checkmark"></span>150%를 넘긴 S마물 표시</label><br/>
+                    <span class="checkmark"></span><span id="txtHardS">150%를 넘긴 S마물 표시</span></label><br/>
                 <br/><div align="center">sappho192@gmail.com</div>
             </div>
         </div>
@@ -263,6 +263,14 @@
                 mdOpt.style.display = "block";
             }
             function optionSChanged(element) {
+                if(!element.checked) {
+                    document.getElementById("cbShowHardSInfo").setAttribute("disabled","");
+                    document.getElementById("txtHardS").setAttribute("gray","");
+                } else {
+                    document.getElementById("cbShowHardSInfo").removeAttribute("disabled");
+                    document.getElementById("txtHardS").removeAttribute("gray");
+                }
+                
                 showSInfo = element.checked;
                 localStorage.setItem('showsinfo', showSInfo);
                 initClient();
