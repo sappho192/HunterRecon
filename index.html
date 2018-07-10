@@ -263,7 +263,7 @@
             function makeApiCall() {
                 var params = {
                     spreadsheetId: '1p-X4AaYuLH2ounIzjKPBYeyFtzlHUgLRh8Xqt3aMaAY',
-                    ranges: showSInfo ? ["B17:H57", "J17:R29"] : ["B17:H57"], // 순서대로 A+S마물, A마물 정보
+                    ranges: showSInfo ? ["C17:H57", "K17:R29"] : ["C17:H57"], // 순서대로 A+S마물, A마물 정보
                     majorDimension: 'ROWS',
                 };
 
@@ -294,20 +294,20 @@
                 var i;
                 for(i = 0; i < dataA.length; i++)
                 {
-                    if(dataA[i].length == 7)
-                    {// ["저지드라", "기계병정 슬립킨크스", "", " 07일 14:04 ~ 07일 16:24", "", "", "66%"]
+                    if(dataA[i].length == 6)
+                    {// [기계병정 슬립킨크스", "", " 07일 14:04 ~ 07일 16:24", "", "", "66%"]
                         var elem = new Array(3);
-                        elem[0] = dataA[i][0];
-                        elem[1] = dataA[i][1];
-                        elem[2] = dataA[i][6];
+                        elem[0] = areaAInfo[dataA[i][0]];
+                        elem[1] = dataA[i][0];
+                        elem[2] = dataA[i][5];
                         tableArr.push(elem);
                     }
-                    else if(dataA[i].length == 4)
+                    else if(dataA[i].length == 3)
                     {// 실종 or 젠대기
                         var elem = new Array(3);
                         if(dataA[i][1].indexOf("실종") != -1) {
-                            elem[0] = dataA[i][0];
-                            elem[1] = dataA[i][1].replace(" ▶실종◀","");
+                            elem[0] = areaAInfo[dataA[i][0]];
+                            elem[1] = dataA[i][0].replace(" ▶실종◀","");
                             elem[2] = "실종";
                             tableArr.push(elem);
                         }
@@ -350,17 +350,18 @@
             function updateSInfo(dataS, tableArr) {
                 for(i = 0; i < dataS.length; i++)
                 {
-                    if(dataS[i].length == 9) // 4==젠중
-                    {//["홍옥해", "오키나", "", " 07일 03:11 ~ 09일 07:11", "", "", "", "", "99%"]
-                        if(parseFloat(dataS[i][8]) > 150 && !showHardSInfo) {
+                    if(dataS[i].length == 8) // 4==젠중
+                    {//["오키나", "", " 07일 03:11 ~ 09일 07:11", "", "", "", "", "99%"]
+                        if(parseFloat(dataS[i][7]) > 150 && !showHardSInfo) {
                             // skip
-                            console.log(dataS[i][0] + ":" + dataS[i][8]);
+                            console.log(dataS[i][0] + ":" + dataS[i][7]);
                         } else {
                             var elem = new Array(3);
-                            elem[0] = dataS[i][0];
-                            elem[1] = dataS[i][1] + "(S)";
-                            elem[2] = dataS[i][8];
+                            elem[0] = areaSInfo[dataS[i][0]];
+                            elem[1] = dataS[i][0] + "(S)";
+                            elem[2] = dataS[i][7];
                             tableArr.push(elem);
+                            console.log(elem);
                         }
                     }
                 }
