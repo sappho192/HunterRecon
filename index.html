@@ -351,7 +351,7 @@
             function updateSInfo(dataS, tableArr) {
                 for(i = 0; i < dataS.length; i++)
                 {
-                    if(dataS[i].length == 7) // 4==젠중
+                    if(dataS[i].length == 9) // 4==젠중
                     {//["오키나", "", " 07일 03:11 ~ 09일 07:11", "", "", "", "", "99%"]
                         if(parseFloat(dataS[i][6]) > 150 && !showHardSInfo) {
                             // skip
@@ -360,7 +360,7 @@
                             var elem = new Array(3);
                             elem[0] = dataS[i][0];
                             elem[1] = dataS[i][1] + "(S)";
-                            elem[2] = dataS[i][6];
+                            elem[2] = dataS[i][8];
                             tableArr.push(elem);
 //                            console.log(elem);
                         }
